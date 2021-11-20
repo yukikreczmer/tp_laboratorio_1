@@ -154,7 +154,6 @@ int ll_add(LinkedList* this, void* pElement)
     {
     	returnAux=addNode(this, ll_len(this), pElement);
     }
-    printf("size: %d\n",ll_len(this));
 
     return returnAux;
 }
@@ -199,7 +198,7 @@ int ll_set(LinkedList* this, int index,void* pElement)
 {
     int returnAux = -1;
     Node* NodeToSet = NULL;
-    if(this != NULL && index > -1 && index < ll_len(this) && pElement!=NULL)
+    if(this != NULL && index > -1 && index < ll_len(this))
     {
     	NodeToSet = getNode(this, index);
     	if(NodeToSet != NULL)
@@ -247,7 +246,7 @@ int ll_remove(LinkedList* this,int index)
        	}
 
        	returnAux = 0;
-       	this->size -= 1;
+       	this->size --;
        }
 
        return returnAux;
