@@ -19,6 +19,12 @@ int PedirEntero(char mensaje[]);
 /// @return flotante ingresado
 float PedirFlotante(char mensaje[]);
 
+/// @brief Pide un string y lo almacena en el string pasado como parametro
+///
+/// @param mensaje Para el ingreso del strin
+/// @param stringIngresado Donde se almacena el string ingresado
+void PedirString (char mensaje[], char stringIngresado[]);
+
 /// @brief Pide el ingreso de un numero entero validando minimo, maximo y caracteres
 ///
 /// @param mensaje Mensaje a mostrar para el ingreso del entero
