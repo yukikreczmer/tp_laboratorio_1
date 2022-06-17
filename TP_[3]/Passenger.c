@@ -5,11 +5,13 @@
  *      Author: Maru
  */
 /*${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}${workspace_loc:/${ProjName}}/LinkedList.a*/
+#include "LinkedList.h"
 #include "Passenger.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "input.h"
+
 
 //CONSTRUCTORES - DESTRUCTOR
 Passenger* Passenger_new()
@@ -232,6 +234,26 @@ int Passenger_printOne(Passenger* this)
 	return retorno;
 }
 
+//FIND
+int Passenger_FindIndexById(LinkedList* this, int id, int* index)
+{
+	int i=-1;
+	int len;
+	Passenger* pAux;
+	if(this  != NULL && id>0 && index!=NULL)
+	{
+		len=ll_len(this);
+		for(i=0; i<len; i++)
+		{
+			pAux=(Passenger*)ll_get(this, i);
+			if(pAux->id == id)
+			{
+				break;
+			}
+		}
+	}
+	return i;
+}
 //TYPE PASSENGER
 void MostrarTypePassenger(void)
 {
@@ -424,7 +446,8 @@ int Passenger_CompareByStatusFlight(void* p1, void* p2)
 	return strcmpi(statusFlight1,statusFlight2);
 }
 
-int CreateNewId(char* pathArchivoIds)
+//ID
+int Id_CreateNew(char* pathArchivoIds)
 {
 	int nuevaId=-1;
 	FILE* pFileId = fopen(pathArchivoIds, "r");
@@ -441,4 +464,78 @@ int CreateNewId(char* pathArchivoIds)
 	}
 
 	return nuevaId;
+}
+
+int Id_GetLast(char* pathArchivoIds)
+{
+	int ultimoId=-1;
+	FILE* pFileId = fopen(pathArchivoIds, "r");
+	if(pFileId != NULL)
+	{
+		fscanf(pFileId, "%d", &ultimoId);
+		fclose(pFileId);
+	}
+
+	return ultimoId;
+}
+
+//MODIFICAR
+int Passenger_ModificarNombre(Passenger* this)
+{
+	int retorno=-1;
+	char nombre[50];
+	if(this != NULL)
+	{
+		PedirStringSinDigitos("Ingrese el nuevo nombre del pasajero/a: ", nombre);
+		retorno=Passenger_setNombre(this, nombre);
+	}
+	return retorno;
+}
+int Passenger_ModificarApellido(Passenger* this)
+{
+	int retorno=-1;
+	char apellido[50];
+	if(this != NULL)
+	{
+		PedirStringSinDigitos("Ingrese el nuevo apellido del pasajero/a: ", apellido);
+		retorno=Passenger_setApellido(this, apellido);
+	}
+	return retorno;
+}
+
+int Passenger_ModificarPrecio(Passenger* this)
+{
+	int retorno=-1;
+	float precio;
+	if(this != NULL)
+	{
+		precio=PedirFlotantePositivoValidandoCaracteres("Ingrese el nuevo precio del pasaje: ");
+		retorno=Passenger_setPrecio(this, precio);
+	}
+	return retorno;
+}
+
+int Passenger_ModificarTypePassenger(Passenger* this)
+{
+	int retorno=-1;
+	char tipoPasajero[20];
+	if(this != NULL)
+	{
+		MostrarTypePassenger();
+		PedirTypePassenger(tipoPasajero);
+		retorno=Passenger_setTipoPasajero(this, tipoPasajero);
+	}
+	return retorno;
+}
+int Passenger_ModificarCodigoVuelo(Passenger* this)
+{
+	int retorno=-1;
+	char codigoVuelo[20];
+	if(this != NULL)
+	{
+		PedirString("Ingrese el codigo del vuelo: ", codigoVuelo);
+		strupr(codigoVuelo);
+		retorno=Passenger_setCodigoVuelo(this, codigoVuelo);
+	}
+	return retorno;
 }

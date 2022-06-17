@@ -66,6 +66,9 @@ int PedirStatusFlight(char* statusFlight);
 //LISTAR
 int Passenger_printOne(Passenger* this);
 
+//FIND
+int Passenger_FindIndexById(LinkedList* this, int id, int* index);
+
 
 //COMPARES
 int Passenger_CompareById(void* p1, void* p2);
@@ -77,11 +80,16 @@ int Passenger_CompareByTipoPasajero(void* p1, void* p2);
 int Passenger_CompareByStatusFlight(void* p1, void* p2);
 
 //ID
-int CreateNewId(char* pathFileIds);
+int Id_CreateNew(char* pathArchivoIds);
+int Id_GetLast(char* pathArchivoIds);
 
 
-//ALTA
-//int Passenger_add()
+//MODIFICAR
+int Passenger_ModificarNombre(Passenger* this);
+int Passenger_ModificarApellido(Passenger* this);
+int Passenger_ModificarPrecio(Passenger* this);
+int Passenger_ModificarTypePassenger(Passenger* this);
+int Passenger_ModificarCodigoVuelo(Passenger* this);
 
 
 
